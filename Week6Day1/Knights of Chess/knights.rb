@@ -11,6 +11,7 @@ class KnightPathFinder
         @start_pos = start_pos
         @visited_pos = []
         @root = PolyTreeNode.new(self.start_pos)
+        #@tree =
         # @start = @grid[start_pos.first][start_pos.last]
     end
 
@@ -70,33 +71,37 @@ class KnightPathFinder
         new_que = []
         
         new_que << self.root
-        #return moves_taken if self.start_pos == end_pos
+
 
         until new_que.empty?
             current_node = new_que.shift
         
-            #return moves_taken << current_node if current_node == end_pos
-            #visited_pos << current_node
-            #real_moves = []
+
             real_moves = find_real_moves(current_node.value)
             real_moves.each do |move|
                  if is_valid_pos?(move)
                     new_node = PolyTreeNode.new(move)
                     current_node.add_child(new_node)
                     new_que << new_node
-                    #moves_taken << move
+
                  end
             end
-            #return moves_taken << current_node if current_node == end_pos
-            #return visited_pos if current_node == end_pos
+
         end
         nil
 
-        # real_moves.each do |ele|
-        #     return moves_taken << ele if ele == end_pos
-        #     find_path(ele)
-        # end
-    
+
+    end
+
+    def find_path(end_pos)
+        self.build_tree(end_pos)
+        tree = self.root
+        engine = []
+        engine << tree.dfs(end_pos)
+        while engine[-1].parent
+            engine << engine[-1].parent
+        end
+        return engine.reverse
     end
 
     def find_real_moves(start)
@@ -114,41 +119,9 @@ end
 
 
 kpf = KnightPathFinder.new([0, 0])
-p kpf.build_tree([2, 1]) # => [[0, 0], [2, 1]]
-p kpf.build_tree([3, 3]) # => [[0, 0], [2, 1], [3, 3]]
-
-#p kpf.grid[10][10]
-#p kpf.all_moves_from_pos([0,0])
-
-#p kpf.is_valid_pos?([-1,-6])
-
-#___________________ BFS _______________________
-
-# def bfs(value)
-
-        
-#     new_q = []
-
-#     new_q << self
-
-#     until new_q.empty?
-#         current_node = new_q.shift
-#         return current_node if current_node.value == value
-#         current_node.children.each do |child|
-#             new_q << child
-#         end
-        
-#     end
-#     nil
-
-#     # if self.value == value
-#     #     return self
-#     # end
-# end
+p kpf.find_path([2, 1]) # => [[0, 0], [2, 1]]
+p kpf.find_path([4, 2]) # => [[0, 0], [2, 1]]
+p kpf.find_path([7, 3]) 
+p kpf.find_path([7, 6]) 
 
 
-# 0,0,  2,1,   3,4   (4,2)
-
-#0,0  2,1  1,2 (3,0)
-
-#Its almost like it is printing out a subset of que ... 
