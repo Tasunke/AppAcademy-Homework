@@ -1,12 +1,11 @@
 require_relative "stack"
-require_relative "qeue"
+require_relative "queue"
 require "byebug"
 
 class PolyTreeNode
     attr_reader :parent, :value
     attr_accessor :children
 
-    
 
     def initialize(value)
     @parent = nil
@@ -64,15 +63,69 @@ class PolyTreeNode
     end
 
     def dfs(value)
+        return self if self.value == value
 
+        children.each do |child|
+            bob = child.dfs(value)
+            return bob if bob
+        end
+        nil
     end
 
     def bfs(value)
+
+        new_q = Queue.new
+
+        new_q.enqueque(self)
+
+        until new_q.empty?
+            current_node = new_q.dequeque
+            return current_node if current_node.value == value
+            current_node.children.each do |child|
+                new_q.enqueque(child)
+            end
+            
+        end
+        nil
+
+        # if self.value == value
+        #     return self
+        # end
 
     end
 
 end
 
+# Nu_Q = Queue.new
+# p Nu_Q
+
 # a = [1,2,3,4,5]
 # p a.delete_at(3)
 # p a
+
+
+
+
+# new_stack = Stack.new
+
+# if self.value == value
+#     return self
+# elsif self.children
+#     if self.childreen.length == 2
+#         new_stack.push(self.children.last)
+#         new_stack.push(self.children.first)
+#     else
+#         self.children.each do |child|
+#         new_stack.push(child)
+#     end
+# end
+#     # new_stack.push(self.children.last)
+#     # new_stack.push(self.children.first)
+# else
+#     new_stack.pop
+# end
+
+# return nil if new_stack.empty?
+
+# new_var = new_stack.pop
+# new_var.dfs(value)

@@ -3,12 +3,12 @@ class Queue
       @underlying_array = []
     end
   
-    def enqueue(el)
+    def enqueque(el)
       underlying_array.push(el)
       el
     end
   
-    def dequeue
+    def dequeque
       underlying_array.shift
     end
   

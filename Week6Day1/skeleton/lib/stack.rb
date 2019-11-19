@@ -16,6 +16,11 @@ class Stack
       underlying_array.last
     end
   
+
+    def empty?
+      underlying_array.length < 1
+    end
+
     private
   
     attr_reader :underlying_array

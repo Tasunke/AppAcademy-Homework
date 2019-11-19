@@ -104,6 +104,9 @@ describe 'Searchable' do
       child.parent = nodes[parent_index]
       parent_index += 1 if index.even?
     end
+    # nodes = [a, b, c, d, e, f, g]
+    # parents = [-, a, a, b, b, c, c]
+
   end
 
   shared_examples_for 'search method' do
