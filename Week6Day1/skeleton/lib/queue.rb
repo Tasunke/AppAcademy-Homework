@@ -15,6 +15,10 @@ class Queue
     def peek
       underlying_array.first
     end
+
+    def inspect
+      @underlying_array.inspect
+    end
   
     private
   

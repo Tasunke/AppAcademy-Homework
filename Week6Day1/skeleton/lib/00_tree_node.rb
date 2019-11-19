@@ -74,15 +74,16 @@ class PolyTreeNode
 
     def bfs(value)
 
-        new_q = Queue.new
+        
+        new_q = []
 
-        new_q.enqueque(self)
+        new_q << self
 
         until new_q.empty?
-            current_node = new_q.dequeque
+            current_node = new_q.shift
             return current_node if current_node.value == value
             current_node.children.each do |child|
-                new_q.enqueque(child)
+                new_q << child
             end
             
         end
@@ -91,7 +92,6 @@ class PolyTreeNode
         # if self.value == value
         #     return self
         # end
-
     end
 
 end
