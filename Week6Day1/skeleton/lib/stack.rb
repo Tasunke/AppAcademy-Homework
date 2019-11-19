@@ -18,7 +18,7 @@ class Stack
   
 
     def empty?
-      underlying_array.length < 1
+      underlying_array.length < 1 
     end
 
     private
