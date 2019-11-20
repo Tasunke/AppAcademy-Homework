@@ -11,6 +11,10 @@ class Board
     @rows = rows
   end
 
+  def inspect
+    @rows.inspect
+  end
+
   def [](pos)
     row, col = pos[0], pos[1]
     @rows[row][col]
@@ -145,6 +149,7 @@ class HumanPlayer
   def initialize(name)
     @name = name
   end
+
 
   def move(game, mark)
     game.show
