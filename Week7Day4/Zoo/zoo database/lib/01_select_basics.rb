@@ -17,7 +17,7 @@ def example_select
     FROM
       countries
     WHERE
-      name = 'France'
+      name = 'germany'
   SQL
 end
 
